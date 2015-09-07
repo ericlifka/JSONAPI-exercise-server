@@ -1,0 +1,6 @@
+{
+  "name": "jsonapi-exercise-server",
+  "version": "0.0.1",
+  "description": "This is a dummy project for the purpose playing with the recently codified jsonapi format",
+  "license": "MIT"
+}
