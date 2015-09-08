@@ -9,4 +9,10 @@ export default class Store {
       };
     });
   }
+
+  find(resourceType, resourceId) {
+    return new Promise((resolve, reject) => {
+      resolve({});
+    })
+  }
 }

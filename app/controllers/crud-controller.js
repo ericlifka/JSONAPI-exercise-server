@@ -1,11 +1,15 @@
 import express from 'express';
 
 export default class CRUDController {
-  constructor(model) {
+  constructor(model, store) {
+    if (!store) {
+      throw "Store must be provided to CRUDController";
+    }
     if (!model || !model.resourceName) {
       throw "Model passed to CRUDController must have a valid resource name";
     }
 
+    this.store = store;
     this.model = model;
     this.resourceName = model.resourceName;
   }
@@ -30,7 +34,11 @@ export default class CRUDController {
   }
 
   READ(req, res) {
-    res.json({'data': {}});
+    const resource_id = req.params.resource_id;
+
+    this.store.find(this.resourceName, resource_id).then(record => {
+      res.json({'data': record});
+    });
   }
 
   READ_ALL(req, res) {
