@@ -26,22 +26,22 @@ export default class CRUDController {
   }
 
   CREATE(req, res) {
-    res.json({'a': 1});
+    res.json({'data': {}});
   }
 
   READ(req, res) {
-    res.json({'a': 1});
+    res.json({'data': {}});
   }
 
   READ_ALL(req, res) {
-    res.json({'a': 1});
+    res.json({'data': []});
   }
 
   UPDATE(req, res) {
-    res.json({'a': 1});
+    res.json({'data': {}});
   }
 
   DELETE(req, res) {
-    res.json({'a': 1});
+    res.json({'data': {}});
   }
 }
