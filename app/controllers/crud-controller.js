@@ -1,3 +1,5 @@
+import express from 'express';
+
 export default class CRUDController {
   constructor(model) {
     if (!model || !model.resourceName) {
@@ -8,12 +10,16 @@ export default class CRUDController {
     this.resourceName = model.resourceName;
   }
 
-  addRoutes(server) {
-    server.post(`/${this.resourceName}`, this.CREATE.bind(this));
-    server.get(`/${this.resourceName}`, this.READ_ALL.bind(this));
-    server.get(`/${this.resourceName}/:resource_id`, this.READ.bind(this));
-    server.put(`/${this.resourceName}/:resource_id`, this.UPDATE.bind(this));
-    server.delete(`/${this.resourceName}/:resource_id`, this.DELETE.bind(this));
+  getRouter() {
+    const router = express.Router();
+
+    router.post(`/${this.resourceName}`, this.CREATE.bind(this));
+    router.get(`/${this.resourceName}`, this.READ_ALL.bind(this));
+    router.get(`/${this.resourceName}/:resource_id`, this.READ.bind(this));
+    router.put(`/${this.resourceName}/:resource_id`, this.UPDATE.bind(this));
+    router.delete(`/${this.resourceName}/:resource_id`, this.DELETE.bind(this));
+
+    return router;
   }
 
   CREATE(req, res) {

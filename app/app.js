@@ -6,6 +6,6 @@ const app = express();
 
 const PersonController = new CRUDController(Person);
 
-PersonController.addRoutes(app);
+app.use('/', PersonController.getRouter());
 
 export default app;
