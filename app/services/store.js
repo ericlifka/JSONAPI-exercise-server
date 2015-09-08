@@ -1,9 +1,12 @@
 export default class Store {
   constructor(...models) {
-    this.models = {};
+    this.resources = {};
 
     models.forEach(model => {
-      this.models[model.resourceName] = model;
+      this.resources[model.resourceName] = {
+        model,
+        records: {}
+      };
     });
   }
 }
