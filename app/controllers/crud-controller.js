@@ -30,26 +30,30 @@ export default class CRUDController {
   }
 
   CREATE(req, res) {
-    res.json({'data': {}});
+    res.json({ 'data': {} });
   }
 
   READ(req, res) {
     const resource_id = req.params.resource_id;
 
-    this.store.find(this.resourceName, resource_id).then(record => {
-      res.json({'data': record});
-    });
+    this.store.find(this.resourceName, resource_id)
+      .then(record => {
+        res.json({ 'data': record });
+      })
+      .catch(error => {
+        res.status(404).json({ 'errors': [ error ] });
+      });
   }
 
   READ_ALL(req, res) {
-    res.json({'data': []});
+    res.json({ 'data': [] });
   }
 
   UPDATE(req, res) {
-    res.json({'data': {}});
+    res.json({ 'data': {} });
   }
 
   DELETE(req, res) {
-    res.json({'data': {}});
+    res.json({ 'data': {} });
   }
 }
