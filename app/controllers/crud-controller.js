@@ -13,11 +13,14 @@ export default class CRUDController {
   getRouter() {
     const router = express.Router();
 
-    router.post(`/${this.resourceName}`, this.CREATE.bind(this));
-    router.get(`/${this.resourceName}`, this.READ_ALL.bind(this));
-    router.get(`/${this.resourceName}/:resource_id`, this.READ.bind(this));
-    router.put(`/${this.resourceName}/:resource_id`, this.UPDATE.bind(this));
-    router.delete(`/${this.resourceName}/:resource_id`, this.DELETE.bind(this));
+    router.route(`/${this.resourceName}`)
+      .post(this.CREATE.bind(this))
+      .get(this.READ_ALL.bind(this));
+
+    router.route(`/${this.resourceName}/:resource_id`)
+      .get(this.READ.bind(this))
+      .put(this.UPDATE.bind(this))
+      .delete(this.DELETE.bind(this));
 
     return router;
   }
