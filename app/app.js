@@ -5,7 +5,7 @@ import Person from './models/person';
 import Store from './services/store';
 
 const app = express();
-const store = new Store();
+const store = new Store(Person);
 const PersonController = new CRUDController(Person, store);
 
 app.use(contentType);
