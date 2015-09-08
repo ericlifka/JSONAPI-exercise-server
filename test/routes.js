@@ -10,7 +10,7 @@ describe('CRUD Routes', function () {
       request(app)
         .get('/people')
         .expect(200)
-        .expect('Content-Type', 'application/vnd.api+json')
+        .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .end(done);
     });
   });
