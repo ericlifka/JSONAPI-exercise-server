@@ -41,5 +41,16 @@ describe('CRUD Routes', function () {
           }
         }, done);
     });
+
+    it('should return an error for a nonexistent person', function (done) {
+      request(app)
+        .get('/people/1000')
+        .expect(404)
+        .expect({
+          errors: [
+            "No record found"
+          ]
+        }, done);
+    });
   });
 });
