@@ -12,8 +12,7 @@ describe('CRUD Routes', function () {
         .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .expect({
           data: []
-        })
-        .end(done);
+        }, done);
     });
   });
 
@@ -24,8 +23,21 @@ describe('CRUD Routes', function () {
         .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .expect({
           data: {}
-        })
-        .end(done);
-    })
+        }, done);
+    });
+
+    it('should describe a person to the jsonapi spec for resources', function (done) {
+      request(app)
+        .get('/people/1')
+        .expect({
+          data: {
+            id: 1,
+            type: "people",
+            attributes: {
+              name: "test person"
+            }
+          }
+        }, done);
+    });
   });
 });
