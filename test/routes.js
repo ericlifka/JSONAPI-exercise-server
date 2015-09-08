@@ -9,6 +9,7 @@ describe('CRUD Routes', function () {
     it('should return a jsonapi collection', function (done) {
       request(app)
         .get('/people')
+        .expect(200)
         .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .expect({
           data: []
@@ -20,6 +21,7 @@ describe('CRUD Routes', function () {
     it('should return a jsonapi resource object', function (done) {
       request(app)
         .get('/people/1')
+        .expect(200)
         .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .expect({
           data: {}
