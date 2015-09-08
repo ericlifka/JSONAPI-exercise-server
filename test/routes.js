@@ -2,9 +2,15 @@ import mocha from 'mocha';
 import should from 'should';
 import assert from 'assert';
 import request from 'supertest';
+import app from '../app/app';
 
-describe('Routing', function () {
-  it('should run a simple test', function () {
-    should(5).equal(5);
+describe('CRUD Routes', function () {
+  describe('GET /people', function () {
+    it('should return a jsonapi content type', function (done) {
+      request(app)
+        .get('/people')
+        .expect('Content-Type', 'application/vnd.api+json')
+        .expect(200, done);
+    });
   });
 });
