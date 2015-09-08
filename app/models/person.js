@@ -1,3 +1,3 @@
-export default class Person {
-
-}
+export default {
+  resourceName: "people"
+};
