@@ -12,7 +12,7 @@ export default class Store {
 
   find(resourceType, resourceId) {
     return new Promise((resolve, reject) => {
-      resolve({});
+      reject("No record found for given id");
     })
   }
 }

@@ -47,9 +47,7 @@ describe('CRUD Routes', () => {
         .get('/people/1000')
         .expect(404)
         .expect({
-          errors: [
-            "No record found"
-          ]
+          errors: [ "No record found for given id" ]
         }, done);
     });
   });
