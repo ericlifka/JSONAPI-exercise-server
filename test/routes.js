@@ -4,9 +4,9 @@ import assert from 'assert';
 import request from 'supertest';
 import app from '../app/app';
 
-describe('CRUD Routes', function () {
-  describe('GET /people', function () {
-    it('should return a jsonapi collection', function (done) {
+describe('CRUD Routes', () => {
+  describe('GET /people', () => {
+    it('should return a jsonapi collection', done => {
       request(app)
         .get('/people')
         .expect(200)
@@ -17,8 +17,8 @@ describe('CRUD Routes', function () {
     });
   });
 
-  describe('GET /people/1', function () {
-    it('should return a jsonapi resource object', function (done) {
+  describe('GET /people/1', () => {
+    it('should return a jsonapi resource object', done => {
       request(app)
         .get('/people/1')
         .expect(200)
@@ -28,7 +28,7 @@ describe('CRUD Routes', function () {
         }, done);
     });
 
-    it('should describe a person to the jsonapi spec for resources', function (done) {
+    it('should describe a person to the jsonapi spec for resources', done => {
       request(app)
         .get('/people/1')
         .expect({
@@ -42,7 +42,7 @@ describe('CRUD Routes', function () {
         }, done);
     });
 
-    it('should return an error for a nonexistent person', function (done) {
+    it('should return an error for a nonexistent person', done => {
       request(app)
         .get('/people/1000')
         .expect(404)
