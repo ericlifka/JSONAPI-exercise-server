@@ -9,8 +9,9 @@ describe('CRUD Routes', function () {
     it('should return a jsonapi content type', function (done) {
       request(app)
         .get('/people')
+        .expect(200)
         .expect('Content-Type', 'application/vnd.api+json')
-        .expect(200, done);
+        .end(done);
     });
   });
 });
