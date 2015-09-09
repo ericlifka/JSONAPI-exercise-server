@@ -38,7 +38,13 @@ export default class CRUDController {
 
     this.store.find(this.resourceName, resource_id)
       .then(record => {
-        res.json({ 'data': record });
+        res.json({
+          data: {
+            id: resource_id,
+            type: this.resourceName,
+            attributes: record
+          }
+        });
       })
       .catch(error => {
         res.status(404).json({ 'errors': [ error ] });
