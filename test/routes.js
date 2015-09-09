@@ -9,12 +9,8 @@ import MockStore from './helpers/mock-store';
 const store = new MockStore(_store);
 
 describe('CRUD Routes', () => {
-  before(done => {
-    _store.resources.people.records = {
-      1: {
-        name: "test person"
-      }
-    };
+  beforeEach(done => {
+    store.cleanRecords();
     done();
   });
 
@@ -40,6 +36,8 @@ describe('CRUD Routes', () => {
 
   describe('GET /people/1', () => {
     it('should describe a person to the jsonapi spec for resources', done => {
+      store.withOnePerson();
+
       request(app)
         .get('/people/1')
         .expect(200)
