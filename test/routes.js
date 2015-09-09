@@ -3,8 +3,18 @@ import should from 'should';
 import assert from 'assert';
 import request from 'supertest';
 import app from '../app/app';
+import { _store } from '../app/app';
 
 describe('CRUD Routes', () => {
+  before(done => {
+    _store.resources.people.records = {
+      1: {
+        name: "test person"
+      }
+    };
+    done();
+  });
+
   describe('GET /people', () => {
     it('should return a jsonapi collection', done => {
       request(app)

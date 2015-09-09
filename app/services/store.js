@@ -3,7 +3,7 @@ export default class Store {
     this.resources = {};
 
     models.forEach(model => {
-      this.resources[model.resourceName] = {
+      this.resources[ model.resourceName ] = {
         model,
         records: {}
       };
@@ -12,7 +12,14 @@ export default class Store {
 
   find(resourceType, resourceId) {
     return new Promise((resolve, reject) => {
-      reject("No record found for given id");
+      const resource = this.resources[ resourceType ];
+      const record = resource && resource.records[ resourceId ];
+
+      if (record) {
+        resolve(record);
+      } else {
+        reject("No record found for given id");
+      }
     })
   }
 }
