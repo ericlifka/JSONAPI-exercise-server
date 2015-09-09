@@ -4,6 +4,9 @@ import assert from 'assert';
 import request from 'supertest';
 import app from '../app/app';
 import { _store } from '../app/app';
+import MockStore from './helpers/mock-store';
+
+const store = new MockStore(_store);
 
 describe('CRUD Routes', () => {
   before(done => {
@@ -24,6 +27,14 @@ describe('CRUD Routes', () => {
         .expect({
           data: []
         }, done);
+    });
+
+    it('should return all people as jsonapi resources', done => {
+
+    });
+
+    it('should return an empty array as the data when there are no people', done => {
+
     });
   });
 

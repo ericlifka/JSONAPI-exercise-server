@@ -52,7 +52,17 @@ export default class CRUDController {
   }
 
   READ_ALL(req, res) {
-    res.json({ 'data': [] });
+    this.store.findAll(this.resoourceName)
+      .then(records => {
+        data: Object.keys(records).map(id => ({
+          id,
+          type: this.resourceName,
+          attributes: records[id]
+        }))
+      })
+      .catch(error => {
+        res.status(404).json({ 'errors': [ error ]})
+      });
   }
 
   UPDATE(req, res) {

@@ -22,4 +22,15 @@ export default class Store {
       }
     })
   }
+
+  findAll(resourceType) {
+    return new Promise((resolve, reject) => {
+      const resource = this.resources[ resourceType ];
+      if (!resource) {
+        reject("Not a valid resource type");
+      } else {
+        resolve(resource.records);
+      }
+    });
+  }
 }
