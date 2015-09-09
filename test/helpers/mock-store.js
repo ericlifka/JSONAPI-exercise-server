@@ -7,15 +7,20 @@ export default class MockStore {
     const resources = this._store.resources;
 
     Object.keys(resources).forEach(resource => {
-      resources[resource].records = {};
+      resources[ resource ].records = {};
     });
   }
 
   withOnePerson() {
     this._store.resources.people.records = {
-      1: {
-        name: "test person"
-      }
+      1: { name: "test person" }
+    };
+  }
+
+  withTwoPeople() {
+    this._store.resources.people.records = {
+      1: { name: "test person 1" },
+      2: { name: "test person 2" }
     };
   }
 }

@@ -16,6 +16,8 @@ describe('CRUD Routes', () => {
 
   describe('GET /people', () => {
     it('should return a jsonapi collection', done => {
+      store.withTwoPeople();
+
       request(app)
         .get('/people')
         .expect(200)
