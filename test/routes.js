@@ -23,7 +23,22 @@ describe('CRUD Routes', () => {
         .expect(200)
         .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .expect({
-          data: []
+          data: [
+            {
+              id: 1,
+              type: "people",
+              attributes: {
+                name: "test person 1"
+              }
+            },
+            {
+              id: 2,
+              type: "people",
+              attributes: {
+                name: "test person 2"
+              }
+            }
+          ]
         }, done);
     });
 
