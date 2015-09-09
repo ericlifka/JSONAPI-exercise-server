@@ -15,7 +15,7 @@ describe('CRUD Routes', () => {
   });
 
   describe('GET /people', () => {
-    it('should return a jsonapi collection', done => {
+    it('should return a jsonapi collection with all available people records', done => {
       store.withTwoPeople();
 
       request(app)
@@ -42,12 +42,12 @@ describe('CRUD Routes', () => {
         }, done);
     });
 
-    it('should return all people as jsonapi resources', done => {
-      done();
-    });
-
     it('should return an empty array as the data when there are no people', done => {
-      done();
+      request(app)
+        .get('/people')
+        .expect(200)
+        .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
+        .expect({ data: [] }, done);
     });
   });
 
