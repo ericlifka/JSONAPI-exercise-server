@@ -28,19 +28,11 @@ describe('CRUD Routes', () => {
   });
 
   describe('GET /people/1', () => {
-    it('should return a jsonapi resource object', done => {
+    it('should describe a person to the jsonapi spec for resources', done => {
       request(app)
         .get('/people/1')
         .expect(200)
         .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
-        .expect({
-          data: {}
-        }, done);
-    });
-
-    it('should describe a person to the jsonapi spec for resources', done => {
-      request(app)
-        .get('/people/1')
         .expect({
           data: {
             id: 1,
