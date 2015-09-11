@@ -79,4 +79,30 @@ describe('CRUD Routes', () => {
         }, done);
     });
   });
+
+  describe('POST /people', () => {
+    it('should create a person', done => {
+      const unique = `Test user ${Math.random()}`;
+
+      request(app)
+        .post('/people')
+        .send({
+          data: {
+            type: "people",
+            attributes: {
+              name: unique
+            }
+          }
+        })
+        .expect(201)
+        .expect({
+          data: {
+            type: "people",
+            attributes: {
+              name: unique
+            }
+          }
+        }, done);
+    });
+  });
 });
