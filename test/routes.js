@@ -104,5 +104,22 @@ describe('CRUD Routes', () => {
           }
         }, done);
     });
+
+    it('should return 409 on an id conflict', done => {
+      store.withOnePerson();
+
+      request(app)
+        .post('/people')
+        .send({
+          data: {
+            id: 1,
+            type: "people",
+            attributes: {
+              name: "test user"
+            }
+          }
+        })
+        .expect(409, done);
+    });
   });
 });
