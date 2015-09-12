@@ -30,7 +30,14 @@ export default class CRUDController {
   }
 
   CREATE(req, res) {
-    res.json({ 'data': {} });
+    const model = this.modelFromRequest(req);
+    this.store.create(this.resourceName, model)
+      .then(record => {
+        res.json({ 'data': {} });
+      })
+      .catch(error => {
+        res.json({ 'data': {} });
+      });
   }
 
   READ(req, res) {
