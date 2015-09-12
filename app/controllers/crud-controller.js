@@ -30,7 +30,16 @@ export default class CRUDController {
   }
 
   CREATE(req, res) {
+    if (req.body.data.type !== this.resourceName) {
+      return res.status(409).json({ errors: [ `Unsupported resource type ${req.body.data.type}` ] });
+    }
+
     const model = this.modelFromRequest(req);
+
+    if (model.errors) {
+      return res.status(403).json(model);
+    }
+
     this.store.create(this.resourceName, model)
       .then(record => {
         res.json({ 'data': {} });
@@ -84,9 +93,22 @@ export default class CRUDController {
 
   modelFromRequest(req) {
     const model = {};
-    console.log(`${typeof req.body} - '${req.body}'`);
-    this.model.attributes.forEach(attribute => {
+    const data = req.body.data;
 
-    });
+    console.log(`${typeof req.body} - '${Object.keys(req.body.data)}'`);
+
+    for (let i = 0; i < this.model.attributes.length; i++) {
+      let attribute = this.model.attributes[ i ];
+
+      let value = data[ attribute.name ];
+      if (value) {
+        model[ attribute.name ] = value;
+      }
+      else if (attribute.required) {
+        return { errors: [ `Missing required attribute ${attribute.name} for ${this.resourceName} records` ] };
+      }
+    }
+
+    return model;
   }
 }
