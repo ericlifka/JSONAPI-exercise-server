@@ -1,3 +1,5 @@
+import uuid from 'uuid';
+
 export default class Store {
   constructor(...models) {
     this.resources = {};
@@ -18,7 +20,7 @@ export default class Store {
       if (record) {
         resolve(record);
       } else {
-        reject("No record found for given id");
+        reject("No record found for given id and resource type");
       }
     })
   }
@@ -30,6 +32,25 @@ export default class Store {
         reject("Not a valid resource type");
       } else {
         resolve(resource.records);
+      }
+    });
+  }
+
+  create(resourceType, model) {
+    return new Promise((resolve, reject) => {
+      const id = uuid.v4();
+      const resource = this.resources[ resourceType ];
+
+      if (!resource) {
+        reject("Not a valid resource type");
+      }
+      else if (resource.records[ id ]) {
+        reject("A record already exists with that ID");
+      }
+      else {
+        resource.records[ id ] = model;
+
+        resolve(id);
       }
     });
   }
