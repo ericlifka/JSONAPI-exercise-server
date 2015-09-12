@@ -95,8 +95,6 @@ export default class CRUDController {
     const model = {};
     const data = req.body.data;
 
-    console.log(`${typeof req.body} - '${Object.keys(req.body.data)}'`);
-
     for (let i = 0; i < this.model.attributes.length; i++) {
       let attribute = this.model.attributes[ i ];
 
