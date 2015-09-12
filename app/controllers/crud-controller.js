@@ -31,7 +31,7 @@ export default class CRUDController {
 
   CREATE(req, res) {
     if (req.body.data.type !== this.resourceName) {
-      return res.status(409).json({ errors: [ `Unsupported resource type ${req.body.data.type}` ] });
+      return res.status(409).json({ errors: [ `Unsupported resource type ${req.body.data.type} for this collection` ] });
     }
 
     const model = this.modelFromRequest(req);
@@ -41,12 +41,16 @@ export default class CRUDController {
     }
 
     this.store.create(this.resourceName, model)
-      .then(record => {
-        res.json({ 'data': {} });
-      })
-      .catch(error => {
-        res.json({ 'data': {} });
-      });
+      .then(id =>
+        res.json({
+          data: {
+            id,
+            type: this.resourceName,
+            attributes: model
+          }
+        }))
+      .catch(error =>
+        res.status(409).json({ errors: [ error ] }));
   }
 
   READ(req, res) {
