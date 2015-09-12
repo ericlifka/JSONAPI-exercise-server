@@ -1,3 +1,10 @@
 export default {
-  resourceName: "people"
+  resourceName: "people",
+  attributes: [
+    {
+      name: "name",
+      type: "string",
+      required: true
+    }
+  ]
 };

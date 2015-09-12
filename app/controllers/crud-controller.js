@@ -81,4 +81,12 @@ export default class CRUDController {
   DELETE(req, res) {
     res.json({ 'data': {} });
   }
+
+  modelFromRequest(req) {
+    const model = {};
+    console.log(`${typeof req.body} - '${req.body}'`);
+    this.model.attributes.forEach(attribute => {
+
+    });
+  }
 }
