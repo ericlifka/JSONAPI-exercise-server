@@ -1,3 +1,4 @@
+import uuid from 'uuid';
 import mocha from 'mocha';
 import should from 'should';
 import assert from 'assert';
@@ -107,6 +108,27 @@ describe('CRUD Routes', () => {
             }
           }
         }, done);
+    });
+
+    it('should use an id if one is supplied', done => {
+      const unique_id = uuid.v4();
+
+      request(app)
+        .post('/people')
+        .send({
+          data: {
+            type: "people",
+            id: unique_id,
+            attributes: {
+              name: "test user"
+            }
+          }
+        })
+        .expect(201)
+        .expect(res => {
+          should(res.body.data.id).equal(unique_id);
+        })
+        .end(done);
     });
 
     it('should return 409 on an id conflict', done => {
