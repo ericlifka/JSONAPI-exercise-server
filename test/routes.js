@@ -95,6 +95,10 @@ describe('CRUD Routes', () => {
           }
         })
         .expect(201)
+        .expect(function(res) {
+          // remove the generated id so that the objects can be compared for validation
+          delete res.body.data.id;
+        })
         .expect({
           data: {
             type: "people",

@@ -42,7 +42,7 @@ export default class CRUDController {
 
     this.store.create(this.resourceName, model)
       .then(id =>
-        res.json({
+        res.status(201).json({
           data: {
             id,
             type: this.resourceName,
@@ -102,7 +102,7 @@ export default class CRUDController {
     for (let i = 0; i < this.model.attributes.length; i++) {
       let attribute = this.model.attributes[ i ];
 
-      let value = data[ attribute.name ];
+      let value = data.attributes[ attribute.name ];
       if (value) {
         model[ attribute.name ] = value;
       }
