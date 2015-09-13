@@ -36,9 +36,8 @@ export default class Store {
     });
   }
 
-  create(resourceType, model) {
+  create(resourceType, model, id = uuid.v4()) {
     return new Promise((resolve, reject) => {
-      const id = uuid.v4();
       const resource = this.resources[ resourceType ];
 
       if (!resource) {

@@ -40,7 +40,7 @@ export default class CRUDController {
       return res.status(403).json(model);
     }
 
-    this.store.create(this.resourceName, model)
+    this.store.create(this.resourceName, model, req.body.data.id)
       .then(id =>
         res.status(201).json({
           data: {
